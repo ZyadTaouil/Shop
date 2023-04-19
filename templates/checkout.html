@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Create a form for checkout -->
+    <form action="{{ url_for('checkout') }}" method="POST" id="checkout-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2>Checkout</h2>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name"
+                               class="form-control" required>
+                        <!-- Add a span element for name error message -->
+                        <span id="name-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email"
+                               class="form-control" required>
+                        <!-- Add a span element for email error message -->
+                        <span id="email-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" name="phone" id="phone"
+                               class="form-control" required>
+                        <!-- Add a span element for phone error message -->
+                        <span id="phone-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" id="address"
+                               class="form-control" required>
+                        <!-- Add a span element for address error message -->
+                        <span id="address-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes (optional)</label>
+                        <textarea name="notes" id="notes"
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Place order"
+                               class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Add custom css style -->
+    <style>
+        h2 {
+            text-align: center;
+            margin: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type=submit] {
+            width: 100%;
+        }
+    </style>
+    <!-- Add javascript verifications -->
+    <script src="static/JS/checkout.js"></script>
+{% endblock %}

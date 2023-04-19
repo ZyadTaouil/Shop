@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+            <div class="col-sm-6 col-md-4 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="{{ product[4] }}"
+                         alt="{{ product[0] }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product[1] }}</h5>
+                        <p class="card-text">{{ product[3] }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price">${{ product[2] }}</span>
+                            <form action="{{ url_for('add_to_cart', product_id=product[0]) }}"
+                                  method="POST">
+                                <div class="input-group">
+                                    <input type="number" name="quantity"
+                                           value="1" min="1"
+                                           class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary"
+                                                type="submit">Add to cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Create a link to cart page -->
+    <div class="text-center mt-5">
+        <a href="{{ url_for('cart') }}" class="btn btn-primary">View cart</a>
+    </div>
+{% endblock %}

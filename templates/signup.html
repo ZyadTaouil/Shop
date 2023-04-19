@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Create a form for signup -->
+    <form action="{{ url_for('signup') }}" method="POST" id="signup-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2>Signup</h2>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username"
+                               class="form-control" required>
+                        <span id="username-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password"
+                               class="form-control" required>
+                        <span id="password-error" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm password</label>
+                        <input type="password" name="confirm_password"
+                               id="confirm_password" class="form-control"
+                               required>
+                        <span id="confirm-password-error"
+                              class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Signup"
+                               class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Add custom css style -->
+    <style>
+        h2 {
+            text-align: center;
+            margin: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type=submit] {
+            width: 100%;
+        }
+    </style>
+    <!-- Add javascript verifications -->
+    <script>
+        // Get the form element by id
+        var form = document.getElementById("signup-form");
+        // Add an event listener for submit event
+        form.addEventListener("submit", function (event) {
+            // Get the input elements by id
+            var username = document.getElementById("username");
+            var password = document.getElementById("password");
+            var confirm_password = document.getElementById("confirm_password");
+            // Get the error message elements by id
+            var usernameError = document.getElementById("username-error");
+            var passwordError = document.getElementById("password-error");
+            var confirm_passwordError = document.getElementById("confirm-" +
+                "password-error");
+            // Clear the error messages
+            usernameError.textContent = "";
+            passwordError.textContent = "";
+            confirm_passwordError.textContent = "";
+            // Validate the input values
+            if (username.value.length < 3) {
+                // Prevent the form from submitting
+                event.preventDefault();
+                // Set the username error message
+                usernameError.textContent = "Username must be at least 3 " +
+                    "characters long";
+            }
+            if (password.value.length < 6) {
+                // Prevent the form from submitting
+                event.preventDefault();
+                // Set the password error message
+                passwordError.textContent = "Password must be at least 6 " +
+                    "characters long";
+            }
+            if (password.value !== confirm_password.value) {
+                // Prevent the form from submitting
+                event.preventDefault();
+                // Set the confirm password error message
+                confirm_passwordError.textContent = "Passwords do not match";
+            }
+        });
+    </script>
+{% endblock %}
